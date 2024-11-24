@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import './index.css';
+import LoginScreen from './components/LoginScreen';
+import SplashScreen from './components/SplashScreen'; // Import the SplashScreen
+import { useState, useEffect } from 'react';
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true); // State to handle splash screen visibility
+
+  useEffect(() => {
+    // Simulate a delay for the splash screen (e.g., 3 seconds)
+    const timer = setTimeout(() => {
+      setIsLoading(false); // Hide the splash screen after the delay
+    }, 3000);
+
+    return () => clearTimeout(timer); // Cleanup the timer
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {isLoading ? <SplashScreen /> : <LoginScreen />}
+    </>
   );
 }
 
